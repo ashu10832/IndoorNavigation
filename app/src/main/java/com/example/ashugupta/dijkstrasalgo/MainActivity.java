@@ -14,13 +14,10 @@ import junit.framework.Test;
 import java.util.LinkedList;
 import java.util.List;
 
-import static android.view.View.Z;
-import static com.example.ashugupta.dijkstrasalgo.DijkstraAlgorithm.getShortestPathTo;
 
 public class MainActivity extends AppCompatActivity {
     Button createGraph,findPath;
     EditText source,destination;
-    DijkstraAlgorithm dijkstrasAlgorithm;
     Graph graph;
     TextView Path;
     @Override
@@ -43,30 +40,16 @@ public class MainActivity extends AppCompatActivity {
         findPath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dijkstrasAlgorithm = new DijkstraAlgorithm();
-                String Source = source.getText().toString();
-                String Destination = destination.getText().toString();
-                Vertex sourceVertex = null,destVertex = null;
-                for (Vertex vertex: graph.getVertexes()) {
-                    if(vertex.name.equals(Source))
-                    {
-                        sourceVertex = vertex;
-                    }
-                    if (vertex.name.equals(Destination))
-                    {
-                        destVertex = vertex;
-                    }
+                DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+                int sourceVertex = Integer.parseInt(source.getText().toString());
+                int destVertex = Integer.parseInt(destination.getText().toString());
+                dijkstra.execute(graph.getVertexes().get(sourceVertex));
+                LinkedList<Vertex> path = dijkstra.getPath(graph.getVertexes().get(destVertex));
+                Path.setText("");
+                for (Vertex vertex : path) {
+                    Path.append(vertex.getName() + "\n");
                 }
-                if (sourceVertex != null)
-                {
-                    dijkstrasAlgorithm.computePaths(sourceVertex);
-                    Path.setText("");
-                    Path.setText("Distance to " + destVertex.name + " is " + destVertex.minDistance);
-                    List<Vertex> path = getShortestPathTo(destVertex);
-                    for (Vertex vertex: path) {
-                        Path.append(vertex.name + "\n");
-                    }
-                }
+
             }
         });
         

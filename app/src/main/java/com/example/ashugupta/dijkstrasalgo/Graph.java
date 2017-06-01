@@ -14,50 +14,30 @@ public class Graph {
     public Graph() {
         vertexes = new ArrayList<>();
         edges = new ArrayList<>();
-        Vertex A = new Vertex("A");
-        Vertex B = new Vertex("B");
-        Vertex D = new Vertex("D");
-        Vertex F = new Vertex("F");
-        Vertex K = new Vertex("K");
-        Vertex J = new Vertex("J");
-        Vertex M = new Vertex("M");
-        Vertex O = new Vertex("O");
-        Vertex P = new Vertex("P");
-        Vertex R = new Vertex("R");
-        Vertex Z = new Vertex("Z");
-
-        // set the edges and weight
-        A.adjacencies = new Edge[]{ new Edge(M, 8) };
-        M.adjacencies = new Edge[]{ new Edge(A, 8) };
-        M.adjacencies = new Edge[]{ new Edge(R,  8) };
-        R.adjacencies = new Edge[]{ new Edge(M,  8) };
-        R.adjacencies = new Edge[]{ new Edge(P, 15) };
-        P.adjacencies = new Edge[]{ new Edge(Z, 18) };
-        Z.adjacencies = new Edge[]{ new Edge(P, 18) };
-        M.adjacencies = new Edge[]{ new Edge(B, 20) };
-        B.adjacencies = new Edge[]{ new Edge(D, 11) };
-        D.adjacencies = new Edge[]{ new Edge(B, 11) };
-        B.adjacencies = new Edge[]{ new Edge(K, 20) };
-        K.adjacencies = new Edge[]{ new Edge(O, 40) };
-        F.adjacencies = new Edge[]{ new Edge(K, 23) };
-        J.adjacencies = new Edge[]{ new Edge(K, 25) };
-        O.adjacencies = new Edge[]{ new Edge(K, 40) };
-        R.adjacencies = new Edge[]{ new Edge(F, 20) };
-
-
-
-
-        vertexes.add(A);
-        vertexes.add(B);
-        vertexes.add(D);
-        vertexes.add(F);
-        vertexes.add(K);
-        vertexes.add(J);
-        vertexes.add(M);
-        vertexes.add(O);
-        vertexes.add(P);
-        vertexes.add(R);
-        vertexes.add(Z);
+        for (int i = 0; i < 11; i++) {
+            Vertex location = new Vertex("Node_" + i, "Node_" + i);
+            vertexes.add(location);
+        }
+        addLane("Edge_0", 0, 1, 85);
+        addLane("Edge_1", 0, 2, 217);
+        addLane("Edge_2", 0, 4, 173);
+        addLane("Edge_3", 2, 6, 186);
+        addLane("Edge_4", 2, 7, 103);
+        addLane("Edge_5", 3, 7, 183);
+        addLane("Edge_6", 5, 8, 250);
+        addLane("Edge_7", 8, 9, 84);
+        addLane("Edge_12", 9, 8, 84);
+        addLane("Edge_8", 7, 9, 167);
+        addLane("Edge_9", 4, 9, 502);
+        addLane("Edge_10", 9, 10, 40);
+        addLane("Edge_11", 1, 10, 600);
+    }
+    private void addLane(String laneId, int sourceLocNo, int destLocNo,
+                         int duration) {
+        Edge lane = new Edge(laneId,vertexes.get(sourceLocNo), vertexes.get(destLocNo), duration );
+        edges.add(lane);
+        lane = new Edge(laneId,vertexes.get(destLocNo),vertexes.get(sourceLocNo),duration);
+        edges.add(lane);
     }
 
     public List<Vertex> getVertexes() {
@@ -67,6 +47,7 @@ public class Graph {
     public List<Edge> getEdges() {
         return edges;
     }
+
 
 
 }
