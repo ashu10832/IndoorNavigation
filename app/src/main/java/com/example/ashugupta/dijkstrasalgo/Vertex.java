@@ -1,5 +1,7 @@
 package com.example.ashugupta.dijkstrasalgo;
 
+import java.util.ArrayList;
+
 /**
  * Created by ashugupta on 01/06/17.
  */
@@ -8,11 +10,13 @@ package com.example.ashugupta.dijkstrasalgo;
 public class Vertex {
     final private String id;
     final private String name;
+    private ArrayList<Picture> pictures;
 
 
-    public Vertex(String id, String name) {
+    public Vertex(String id, String name, ArrayList<Picture> pictures) {
         this.id = id;
         this.name = name;
+        this.pictures  = new ArrayList<>(pictures);
     }
     public String getId() {
         return id;
@@ -22,7 +26,6 @@ public class Vertex {
         return name;
     }
 
-    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -52,4 +55,13 @@ public class Vertex {
         return name;
     }
 
+
+
+    public ArrayList<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(ArrayList<Picture> pictures) {
+        this.pictures = pictures;
+    }
 }
